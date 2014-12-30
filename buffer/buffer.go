@@ -16,6 +16,7 @@ type Client struct {
 	client      *http.Client
 
 	Profiles *ProfilesService
+	Updates  *UpdatesService
 	User     *UserService
 }
 
@@ -33,6 +34,7 @@ func NewClient(accessToken string, httpClient *http.Client) *Client {
 	}
 
 	client.Profiles = &ProfilesService{client: client}
+	client.Updates = &UpdatesService{client: client}
 	client.User = &UserService{client: client}
 
 	return client
