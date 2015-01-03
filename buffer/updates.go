@@ -26,16 +26,16 @@ type Update struct {
 	Via             string                 `json:"via,omitempty"`
 }
 
-func (s *UpdatesService) Get(profileID string) (*Profile, error) {
-	u := fmt.Sprintf("/1/profiles/%v.json", profileID)
+func (s *UpdatesService) Get(updateID string) (*Update, error) {
+	u := fmt.Sprintf("/1/updates/%v.json", updateID)
 
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	profile := new(Profile)
-	_, err = s.client.Do(req, profile)
+	update := new(Update)
+	_, err = s.client.Do(req, update)
 
-	return profile, err
+	return update, err
 }
