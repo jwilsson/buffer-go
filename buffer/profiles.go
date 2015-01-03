@@ -88,3 +88,17 @@ func (s *ProfilesService) GetPendingUpdates(profileID string, params *PagingPara
 
 	return updates, err
 }
+
+func (s *ProfilesService) GetSentUpdates(profileID string, params *PagingParams) (*Updates, error) {
+	u := fmt.Sprintf("/1/profiles/%v/updates/sent.json", profileID)
+
+	req, err := s.client.NewRequest("GET", u, params)
+	if err != nil {
+		return nil, err
+	}
+
+	updates := new(Updates)
+	_, err = s.client.Do(req, updates)
+
+	return updates, err
+}
