@@ -8,12 +8,12 @@ import (
 )
 
 func main() {
-    client := buffer.NewClient("ACCESS TOKEN", nil)
+    client := buffer.NewClient("1/ba8351857c1936233f25158026d4d5c5", nil)
 
-    user, err := client.User.Get()
+    shares, err := client.Links.GetShares("http://bufferapp.com")
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error: %v\n", err)
     }
 
-    fmt.Println("User Timezone:", user.Timezone)
+    fmt.Println("Shares: ", shares)
 }
