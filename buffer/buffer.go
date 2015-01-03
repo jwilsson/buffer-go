@@ -12,6 +12,13 @@ const (
 	ApiURL = "https://api.bufferapp.com"
 )
 
+type PagingParams struct {
+	Count int  `url:"count"`
+	Page  int  `url:"page"`
+	Since int  `url:"since"`
+	UTC   bool `url:"utc"`
+}
+
 type Client struct {
 	AccessToken string
 	BaseURL     *url.URL

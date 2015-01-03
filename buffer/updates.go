@@ -26,6 +26,11 @@ type Update struct {
 	Via             string                 `json:"via,omitempty"`
 }
 
+type Updates struct {
+	Total   int      `json:"total,omitempty"`
+	Updates []Update `json:"updates,omitempty"`
+}
+
 func (s *UpdatesService) Get(updateID string) (*Update, error) {
 	u := fmt.Sprintf("/1/updates/%v.json", updateID)
 

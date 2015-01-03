@@ -74,3 +74,17 @@ func (s *ProfilesService) GetSchedules(profileID string) (*ProfileSchedule, erro
 
 	return schedule, err
 }
+
+func (s *ProfilesService) GetPendingUpdates(profileID string, params *PagingParams) (*Updates, error) {
+	u := fmt.Sprintf("/1/profiles/%v/updates/pending.json", profileID)
+
+	req, err := s.client.NewRequest("GET", u, params)
+	if err != nil {
+		return nil, err
+	}
+
+	updates := new(Updates)
+	_, err = s.client.Do(req, updates)
+
+	return updates, err
+}
