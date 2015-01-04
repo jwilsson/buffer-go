@@ -58,6 +58,20 @@ func (s *UpdatesService) Get(updateID string) (*Update, error) {
 	return update, err
 }
 
+func (s *UpdatesService) MoveToTop(updateID string) (*Update, error) {
+	u := fmt.Sprintf("/1/updates/%v/move_to_top.json", updateID)
+
+	req, err := s.client.NewRequest("POST", u, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	update := new(Update)
+	_, err = s.client.Do(req, update)
+
+	return update, err
+}
+
 func (s *UpdatesService) Share(updateID string) (bool, error) {
 	u := fmt.Sprintf("/1/updates/%v/share.json", updateID)
 
