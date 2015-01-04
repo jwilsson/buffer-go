@@ -31,6 +31,19 @@ type Updates struct {
 	Updates []Update `json:"updates,omitempty"`
 }
 
+func (s *UpdatesService) Destroy(updateID string) (bool, error) {
+	u := fmt.Sprintf("/1/updates/%v/destroy.json", updateID)
+
+	req, err := s.client.NewRequest("POST", u, nil)
+	if err != nil {
+		return false, err
+	}
+
+	_, err = s.client.Do(req, nil)
+
+	return true, err
+}
+
 func (s *UpdatesService) Get(updateID string) (*Update, error) {
 	u := fmt.Sprintf("/1/updates/%v.json", updateID)
 
