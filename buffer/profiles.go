@@ -102,3 +102,17 @@ func (s *ProfilesService) GetSentUpdates(profileID string, params *PagingParams)
 
 	return updates, err
 }
+
+func (s *ProfilesService) ShuffleUpdates(profileID string, params *PagingParams) (*Updates, error) {
+	u := fmt.Sprintf("/1/profiles/%v/updates/shuffle.json", profileID)
+
+	req, err := s.client.NewRequest("POST", u, params)
+	if err != nil {
+		return nil, err
+	}
+
+	updates := new(Updates)
+	_, err = s.client.Do(req, updates)
+
+	return updates, err
+}
